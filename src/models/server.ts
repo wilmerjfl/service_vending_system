@@ -16,8 +16,8 @@ class Server {
 
   constructor() {
     this.app = express()
-    this.port = process.env.PORT || '3000'
-    this.node_env = process.env.NODE_ENV || 'develoment'
+    this.port = process.env.PORT || '8080'
+    this.node_env = process.env.NODE_ENV || 'production'
     // Define routes
     this.routes()
   }
