@@ -4,9 +4,8 @@ class MongoDB {
 
   private URL: string
 
-  constructor() {
-    this.URL = process.env.MONGO_URL ||
-      'mongodb://root:root@localhost:27017/?authSource=admin&readPreference=primary&appname=MongoDB%20Compass&ssl=false'
+  constructor(MongoURL: string) {
+    this.URL = MongoURL
   }
 
   connect(): void {

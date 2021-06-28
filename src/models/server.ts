@@ -11,6 +11,7 @@ class Server {
   private port: string
   private node_env: string
   private db: MongoDB
+  private mongo_url: string
 
   // Define ApiPaths 
   private apiPaths = {
@@ -24,7 +25,9 @@ class Server {
     this.node_env = process.env.NODE_ENV || 'production'
 
     // Connect to DB MongoDB
-    this.db = new MongoDB()
+    this.mongo_url = process.env.MONGO_URL ||
+    'mongodb://mongo:27017/Vendings'
+    this.db = new MongoDB(this.mongo_url)
     this.db.connect()
 
     // Middlewares
