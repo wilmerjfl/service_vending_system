@@ -1,0 +1,11 @@
+# Node Modules
+node_modules
+
+# Environment Variables
+.env
+
+# Package Lock
+package-lock.json
+
+# Compile JS
+dist
