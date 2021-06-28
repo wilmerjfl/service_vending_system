@@ -1,10 +1,13 @@
 import { Router } from 'express'
 
-import { getVendings } from '../controllers/vendings'
+import { getOneVending, postVendings } from '../controllers/vendings'
 
 const router = Router()
 
 router.route('/:id')
-  .get(getVendings)
+  .get(getOneVending)
+
+router.route('/')
+.post(postVendings)
 
 export default router
