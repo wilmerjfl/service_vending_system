@@ -1,10 +1,12 @@
 import express, { Application } from 'express'
 import cors from 'cors'
+import mongoSanitize from 'express-mongo-sanitize'
+import { morganPersist } from 'morgan-persist'
+const rateLimit = require('express-rate-limit')
 
 // Import Routes
 import vendingsRoute from '../routes/vendings'
 import MongoDB from '../config/db'
-
 class Server {
 
   private app: Application
@@ -25,7 +27,7 @@ class Server {
     this.node_env = process.env.NODE_ENV || 'production'
 
     // Connect to DB MongoDB
-    this.mongo_url = process.env.MONGO_URL ||
+    this.mongo_url = `${process.env.MONGO_URL}` ||
     'mongodb://mongo:27017/Vendings'
     this.db = new MongoDB(this.mongo_url)
     this.db.connect()
@@ -45,7 +47,22 @@ class Server {
     this.app.use( express.json())
 
     // Public folders
-    this.app.use( express.static('src/public'))
+    this.app.use(express.static('src/public'))
+    
+    // sanitize Mongo
+    this.app.use(mongoSanitize())
+
+    // Save Log in database
+    this.app.use(morganPersist({
+      connectionString: `${process.env.MONGO_URL}` ||
+      'mongodb://mongo:27017/Vendings'
+    }))
+
+    // Rate limit
+    this.app.use(rateLimit({
+      windowMs: 60 * 60 * 1000, // 1 hour
+      max: 100
+    }))
   }
 
   routes(): void {

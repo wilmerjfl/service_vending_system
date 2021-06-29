@@ -14,6 +14,7 @@ class MongoDB {
       useCreateIndex: true,
       useFindAndModify: false,
       useUnifiedTopology: true,
+      dbName: 'Vendings'
     }).
       then((res) => {
         console.log(`MongoDB Connected: ${res.connection.host}`)
