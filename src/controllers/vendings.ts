@@ -21,6 +21,12 @@ export const getOneVending = async (req: Request, res: Response) => {
 export const postVendings = async (req: Request, res: Response) => {
   
   const vending = await VendingModel.create(req.body)
+    .catch((err) => {
+    res.status(400).json({
+      success: false,
+      message: err.message
+    })
+  })
 
   res.status(201).json({
     success: true,
