@@ -24,11 +24,10 @@ class Server {
 
     this.app = express()
     this.port = process.env.PORT || '5000'
-    this.node_env = process.env.NODE_ENV || 'production'
+    this.node_env = process.env.NODE_ENV || 'development'
 
     // Connect to DB MongoDB
-    this.mongo_url = `${process.env.MONGO_URL}` ||
-    'mongodb://mongo:27017/Vendings'
+    this.mongo_url = process.env.MONGO_URL || 'mongodb://mongo:27017'
     this.db = new MongoDB(this.mongo_url)
     this.db.connect()
 
@@ -54,8 +53,7 @@ class Server {
 
     // Save Log in database
     this.app.use(morganPersist({
-      connectionString: `${process.env.MONGO_URL}` ||
-      'mongodb://mongo:27017/Vendings'
+      connectionString: process.env.MONGO_URL
     }))
 
     // Rate limit

@@ -1,7 +1,11 @@
-FROM node:14
+FROM node:10.13-alpine
+
+ENV NODE_ENV production
+ENV MONGO_URL mongodb://mongo:27017
+
 WORKDIR /usr/src/vending
 
-COPY package.json ./
+COPY ["package.json","./"]
 
 RUN npm install
 

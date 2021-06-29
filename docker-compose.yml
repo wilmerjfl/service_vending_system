@@ -4,6 +4,9 @@ services:
     container_name: vending-app
     restart: always
     build: .
+    environment: 
+      NODE_ENV: production
+      MONGO_URL: mongodb://mongo:27017
     ports:
       - '5000:5000'
     links:
@@ -13,3 +16,7 @@ services:
     image: mongo
     ports:
       - '27017:27017'
+    volumes:
+      - data:/data/db
+volumes:
+  data:
