@@ -23,7 +23,7 @@ class Server {
   constructor() {
 
     this.app = express()
-    this.port = process.env.PORT || '8080'
+    this.port = process.env.PORT || '5000'
     this.node_env = process.env.NODE_ENV || 'production'
 
     // Connect to DB MongoDB
