@@ -3,7 +3,7 @@ services:
   app:
     container_name: vending-app
     restart: always
-    build: .
+    image: wilmerjfl/vending_service:v1
     environment: 
       NODE_ENV: production
       MONGO_URL: mongodb://mongo:27017
